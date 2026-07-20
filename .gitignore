@@ -1,0 +1,9 @@
+# Local development and tunnel logs
+localtunnel.*.log
+*.log
+
+# OS/editor metadata
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
