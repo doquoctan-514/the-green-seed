@@ -8,7 +8,7 @@ window.TGS_CONFIG = {
     tiktok: "",
     address: ""
   },
-  googleAppsScriptUrl: "",
+  googleAppsScriptUrl: "https://script.google.com/macros/s/AKfycbwwb3k3e_tBqlr_sByDGifW-YVlRyWfg0jiywyt0ABrmnvI1GOQGB-RGbsXh7Xz1tn8IA/exec",
   products: [
     { name: "Cuộn 200g", price: "39.000đ", size: "", note: "Giá bán dự kiến" },
     { name: "Cuộn 500g", price: "79.000đ", size: "20cm × 20m", note: "Giá bán dự kiến" },
