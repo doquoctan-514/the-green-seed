@@ -122,7 +122,7 @@
         <div class="container footer-grid">
           <div class="footer-brand">
             <a class="footer-logo" href="index.html">
-              <span class="footer-mark"><img src="assets/images/logo-mark.png" width="128" height="126" alt=""></span>
+              <span class="footer-mark"><img src="assets/images/logo-mark.png" width="128" height="126" alt="" loading="lazy" decoding="async"></span>
               <span><strong>THE GREEN SEED</strong><small>Từ hạt nhãn – Vì tương lai xanh</small></span>
             </a>
             <p>Biến phụ phẩm nông nghiệp thành giải pháp vật liệu sinh học có giá trị.</p>
@@ -192,6 +192,24 @@
     els.forEach(el => observer.observe(el));
   }
 
+  function restoreHashTarget() {
+    if (!location.hash) return;
+
+    let id = location.hash.slice(1);
+    try {
+      id = decodeURIComponent(id);
+    } catch (err) {
+      // Keep the raw fragment when it is not valid URI-encoded text.
+    }
+
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => target.scrollIntoView({ block: "start" }));
+    });
+  }
+
   function initForm() {
     const form = document.querySelector("[data-interest-form]");
     if (!form) return;
@@ -226,7 +244,7 @@
         form.reset();
         if (status) {
           status.classList.add("is-success");
-          status.textContent = "Yêu cầu đã được gửi đến hệ thống nhận đăng ký. The Green Seed sẽ liên hệ khi có thông tin phù hợp.";
+          status.textContent = "Yêu cầu đã được gửi đi. The Green Seed sẽ liên hệ sau khi hệ thống xác nhận tiếp nhận thành công.";
         }
       } catch (err) {
         if (status) {
@@ -245,4 +263,6 @@
   initFaq();
   initReveal();
   initForm();
+  restoreHashTarget();
+  addEventListener("hashchange", restoreHashTarget);
 })();
