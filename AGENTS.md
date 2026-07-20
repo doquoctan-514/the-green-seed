@@ -19,6 +19,7 @@ There is no package install or production build step. Validation is performed ag
 ## Main files
 
 - Page content: `*.html`
+- Privacy information: `quyen-rieng-tu.html`
 - Shared styles: `assets/css/styles.css`
 - Shared navigation, footer, FAQ, and form behavior: `assets/js/site.js`
 - Frequently changed brand, price, contact, and endpoint data: `assets/js/content.js`

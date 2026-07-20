@@ -23,6 +23,7 @@ Sau đó mở `http://localhost:8080`.
 - `tac-dong.html`: Tác động bền vững
 - `faq.html`: FAQ
 - `lien-he.html`: Form quan tâm / dùng thử
+- `quyen-rieng-tu.html`: Cách thu thập, sử dụng và xóa dữ liệu đăng ký
 
 ## Chỉnh nội dung nhanh
 
@@ -31,6 +32,8 @@ Mở `assets/js/content.js` để sửa:
 - Email, SĐT, địa chỉ
 - Link Google Apps Script
 - Giá sản phẩm
+
+Giá và quy cách trong `content.js` được đồng bộ vào các thẻ có `data-product-index` và `data-combo-index` khi trang tải.
 
 Nội dung dài của từng trang nằm trực tiếp trong file HTML tương ứng.
 
@@ -50,6 +53,31 @@ googleAppsScriptUrl: "URL_CUA_BAN"
 ```
 
 Khi URL đang để trống, form chạy ở chế độ demo và chưa lưu dữ liệu.
+
+Sau mỗi lần sửa `google-apps-script/Code.gs`, cần tạo phiên bản triển khai mới trong Apps Script và cập nhật deployment đang dùng. Bản Code.gs hiện tại bổ sung:
+
+- validation phía server
+- mã gửi để chống ghi trùng
+- honeypot và giới hạn gửi lặp trong 60 giây
+- làm sạch dữ liệu có nguy cơ trở thành công thức trong Google Sheet
+- xác minh submission bằng JSONP trước khi website hiển thị trạng thái thành công
+- lưu nguồn CTA và UTM
+
+Nếu chưa redeploy Apps Script mới, website sẽ giữ dữ liệu trên form và hiển thị trạng thái “chưa xác nhận lưu”, không giả vờ đã lưu thành công.
+
+## Tracking
+
+Website phát các event qua `window.dataLayer` và sự kiện `tgs:analytics`:
+
+- `tgs_page_view`
+- `tgs_cta_click`
+- `tgs_form_start`
+- `tgs_form_submit`
+- `tgs_form_submit_success`
+- `tgs_form_submit_error`
+- `tgs_contact_click`
+
+Chưa có GA4/Meta Pixel ID nên các event mới ở trạng thái sẵn sàng tích hợp, chưa gửi sang nền tảng quảng cáo bên ngoài.
 
 ## Chế độ chưa public
 
