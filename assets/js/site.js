@@ -1,6 +1,7 @@
 (function () {
   const cfg = window.TGS_CONFIG || {};
   const current = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
 
   const icon = (name) => {
     const paths = {
@@ -106,6 +107,18 @@
     addEventListener("resize", () => {
       if (nav.classList.contains("is-open")) updateNavPosition();
     }, { passive: true });
+
+    const header = host.querySelector(".site-header");
+    let scrollFrame = 0;
+    const updateHeaderState = () => {
+      scrollFrame = 0;
+      header?.classList.toggle("is-scrolled", scrollY > 12);
+    };
+    addEventListener("scroll", () => {
+      if (scrollFrame) return;
+      scrollFrame = requestAnimationFrame(updateHeaderState);
+    }, { passive: true });
+    updateHeaderState();
   }
 
   function renderFooter() {
@@ -157,6 +170,11 @@
     document.querySelectorAll(".faq-button").forEach((btn, index) => {
       const itemId = `faq-${index + 1}`;
       const panel = btn.closest(".faq-item")?.querySelector(".faq-panel");
+      const indicator = document.createElement("span");
+      indicator.className = "faq-icon";
+      indicator.setAttribute("aria-hidden", "true");
+      indicator.textContent = "+";
+      btn.append(indicator);
       btn.type = "button";
       btn.id = `${itemId}-button`;
       btn.setAttribute("aria-controls", `${itemId}-panel`);
@@ -168,19 +186,72 @@
       btn.addEventListener("click", () => {
         const item = btn.closest(".faq-item");
         const activePanel = item?.querySelector(".faq-panel");
-        const open = item?.classList.toggle("is-open");
-        btn.setAttribute("aria-expanded", String(Boolean(open)));
-        if (activePanel) activePanel.hidden = !open;
+        const open = btn.getAttribute("aria-expanded") !== "true";
+        item?.classList.toggle("is-open", open);
+        btn.setAttribute("aria-expanded", String(open));
+        if (!activePanel) return;
+
+        activePanel.getAnimations?.().forEach(animation => animation.cancel());
+        if (reducedMotion.matches || !activePanel.animate) {
+          activePanel.hidden = !open;
+          return;
+        }
+
+        activePanel.hidden = false;
+        const panelHeight = activePanel.scrollHeight;
+        const animation = activePanel.animate(
+          open
+            ? [
+                { height: "0px", opacity: 0, transform: "translateY(-4px)" },
+                { height: `${panelHeight}px`, opacity: 1, transform: "translateY(0)" }
+              ]
+            : [
+                { height: `${panelHeight}px`, opacity: 1, transform: "translateY(0)" },
+                { height: "0px", opacity: 0, transform: "translateY(-4px)" }
+              ],
+          {
+            duration: open ? 260 : 190,
+            easing: "cubic-bezier(.22,1,.36,1)",
+            fill: "both"
+          }
+        );
+        animation.addEventListener("finish", () => {
+          if (!open && btn.getAttribute("aria-expanded") === "false") {
+            activePanel.hidden = true;
+          }
+          animation.cancel();
+        }, { once: true });
       });
     });
   }
 
   function initReveal() {
-    const els = document.querySelectorAll("[data-reveal]");
-    if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const els = [...document.querySelectorAll("[data-reveal]")];
+    if (!els.length) return;
+    if (!("IntersectionObserver" in window) || reducedMotion.matches) {
       els.forEach(el => el.classList.add("is-visible"));
       return;
     }
+
+    const staggerGroups = [
+      ".stats-grid",
+      ".card-grid",
+      ".product-grid",
+      ".impact-grid",
+      ".process-line",
+      ".timeline",
+      ".faq-list",
+      ".steps"
+    ];
+    document.querySelectorAll(staggerGroups.join(",")).forEach(group => {
+      [...group.children].filter(el => el.matches("[data-reveal]")).forEach((el, index) => {
+        el.style.setProperty("--reveal-delay", `${Math.min(index, 5) * 60}ms`);
+      });
+    });
+    document.querySelector(".hero-visual[data-reveal]")?.style.setProperty("--reveal-delay", "100ms");
+    document.querySelector(".page-hero-grid > :nth-child(2)[data-reveal]")?.style.setProperty("--reveal-delay", "80ms");
+
+    document.documentElement.classList.add("motion-ready");
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -188,7 +259,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
     els.forEach(el => observer.observe(el));
   }
 
@@ -214,6 +285,11 @@
     const form = document.querySelector("[data-interest-form]");
     if (!form) return;
     const status = form.querySelector("[data-form-status]");
+    if (status) {
+      status.setAttribute("role", "status");
+      status.setAttribute("aria-live", "polite");
+      status.setAttribute("aria-atomic", "true");
+    }
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const submit = form.querySelector('button[type="submit"]');
@@ -233,6 +309,8 @@
       }
 
       submit.disabled = true;
+      submit.classList.add("is-loading");
+      submit.setAttribute("aria-busy", "true");
       submit.textContent = "Đang gửi...";
 
       try {
@@ -253,6 +331,8 @@
         }
       } finally {
         submit.disabled = false;
+        submit.classList.remove("is-loading");
+        submit.removeAttribute("aria-busy");
         submit.textContent = "Gửi đăng ký";
       }
     });
