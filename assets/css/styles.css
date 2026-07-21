@@ -504,7 +504,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}
-  [data-reveal],.motion-ready [data-reveal]{opacity:1;transform:none;will-change:auto}
+  
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -519,9 +519,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   from { opacity:0; transform:scale(.55) rotate(-12deg); }
   to   { opacity:1; transform:scale(1) rotate(0deg); }
 }
-@keyframes filmSweep {
-  from { clip-path:inset(0 100% 0 0 round 4px); opacity:.6; }
-  to   { clip-path:inset(0 0% 0 0 round 4px);   opacity:1; }
+@keyframes filmFade {
+  from { opacity:0; transform:scaleX(0); transform-origin:left; }
+  to   { opacity:1; transform:scaleX(1); transform-origin:left; }
 }
 @keyframes shimmerRun {
   0%   { transform:translateX(-110%); }
@@ -577,9 +577,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   transform:translateX(-110%);
   border-radius:inherit;
 }
-.hero-film-strip.film-shimmer { clip-path:inset(0 100% 0 0 round 4px); }
+.hero-film-strip { opacity:0; }
 .hero-film-strip.shimmer-run  {
-  animation:filmSweep 700ms 60ms cubic-bezier(.16,1,.3,1) both;
+  animation:filmFade 800ms 200ms cubic-bezier(.16,1,.3,1) both;
 }
 .hero-film-strip.shimmer-run::before {
   animation:shimmerRun 900ms 400ms ease both;
@@ -595,6 +595,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* ── Hero text stagger ── */
 @media (prefers-reduced-motion:no-preference) {
   .hero-text-reveal {
+    opacity:0;
     opacity:0;
     animation:heroTextReveal 560ms var(--motion-ease-out) both;
   }
@@ -753,6 +754,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     transition:none !important;
   }
   .hero-seed         { opacity:1 !important; transform:none !important; }
-  .hero-film-strip   { clip-path:none !important; opacity:.35 !important; }
+  .hero-film-strip   { opacity:0.3 !important; }
   .product-card--featured { box-shadow:var(--shadow) !important; }
 }
