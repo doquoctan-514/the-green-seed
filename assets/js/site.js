@@ -292,8 +292,7 @@
       const values = {
         "[data-product-name]": product.name,
         "[data-product-price]": product.price,
-        "[data-product-size]": product.size,
-        "[data-product-note]": product.note
+        "[data-product-size]": product.size
       };
       Object.entries(values).forEach(([selector, value]) => {
         const target = card.querySelector(selector);
@@ -311,6 +310,10 @@
       card.querySelector("[data-combo-name]")?.replaceChildren(combo.name);
       card.querySelector("[data-combo-price]")?.replaceChildren(combo.price);
       card.querySelector("[data-combo-discount]")?.replaceChildren(combo.discount);
+      const cta = card.querySelector("[data-combo-cta]");
+      if (cta) {
+        cta.href = `lien-he.html?interest=trial&product=${encodeURIComponent(combo.id)}&source=combo-card#form`;
+      }
     });
   }
 
