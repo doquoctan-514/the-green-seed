@@ -10,7 +10,8 @@
       arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
       leaf: '<path d="M20 4C10 4 4 10 4 20c10 0 16-6 16-16Z"/><path d="M4 20c4-5 8-8 13-11"/>',
       check: '<path d="m5 12 4 4L19 6"/>',
-      mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>'
+      mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+      tiktok: '<path d="M14 4v10.5a4.5 4.5 0 1 1-4-4.47"/><path d="M14 4c.6 2.6 2.2 4 5 4"/>'
     };
     return `<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${paths[name] || paths.leaf}</svg>`;
   };
@@ -25,7 +26,7 @@
     }).join("");
 
     host.innerHTML = `
-      <div class="announcement">
+      <div class="announcement" role="region" aria-label="Thông báo sản phẩm">
         <div class="container announcement-inner">
           <span>Mẫu thử đang được hoàn thiện và kiểm nghiệm</span>
           <a href="lien-he.html?interest=trial&source=announcement#form">Đăng ký trải nghiệm sớm ${icon("arrow")}</a>
@@ -129,7 +130,7 @@
     const contactItems = [
       b.email ? `<a href="mailto:${b.email}">${b.email}</a>` : "",
       b.phone ? `<a href="tel:${String(b.phone).replace(/\s/g,"")}">${b.phone}</a>` : "",
-      b.tiktok ? `<a href="${b.tiktok}" target="_blank" rel="noopener noreferrer">TikTok @thegreenseedvn</a>` : "",
+      b.tiktok ? `<a class="footer-social-link" href="${b.tiktok}" target="_blank" rel="noopener noreferrer"><span class="footer-social-icon">${icon("tiktok")}</span><span>TikTok @thegreenseedvn</span></a>` : "",
       b.address ? `<span>${b.address}</span>` : "",
       b.organization ? `<span>${b.organization}</span>` : ""
     ].filter(Boolean).join("");
