@@ -16,7 +16,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/images/favicon.png">
   <link rel="preload" as="image" href="assets/images/hero-product-v2.webp" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260721-3">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260721-4">
 </head>
 <body>
   <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
@@ -43,7 +43,31 @@
       </div>
     </div>
     <div class="hero-visual" data-reveal>
-      <div class="hero-frame">
+      <div class="hero-frame film-shimmer">
+        <!-- Seed SVG: animates in via motion.js -->
+        <svg class="hero-seed" aria-hidden="true" viewBox="0 0 64 90" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="seed-grad" cx="42%" cy="32%" r="58%">
+              <stop offset="0%"   stop-color="#5c3317"/>
+              <stop offset="55%"  stop-color="#3b1f0b"/>
+              <stop offset="100%" stop-color="#1e0d04"/>
+            </radialGradient>
+            <radialGradient id="seed-hi" cx="38%" cy="28%" r="45%">
+              <stop offset="0%"  stop-color="rgba(255,255,255,.32)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+            </radialGradient>
+          </defs>
+          <!-- Main body -->
+          <ellipse cx="32" cy="50" rx="19" ry="28" fill="url(#seed-grad)"/>
+          <!-- Top point -->
+          <ellipse cx="32" cy="24" rx="7" ry="10" fill="#3b1f0b"/>
+          <!-- Highlight -->
+          <ellipse cx="26" cy="36" rx="7" ry="11" fill="url(#seed-hi)" transform="rotate(-18 26 36)"/>
+          <!-- Subtle ridge line -->
+          <path d="M32 22 Q36 46 32 78" stroke="rgba(0,0,0,.18)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        </svg>
+        <!-- Film material shimmer overlay -->
+        <div class="hero-film-strip film-shimmer" aria-hidden="true"></div>
         <img src="assets/images/hero-product-v2.webp" width="1200" height="800" alt="Ảnh mô phỏng trung tính cuộn màng mẫu, hộp kraft và hạt nhãn" fetchpriority="high" decoding="async">
         <div class="hero-badge">
           <strong>Dùng rác để thay thế rác</strong>
@@ -232,7 +256,8 @@
 
   </main>
   <div data-site-footer></div>
-  <script src="assets/js/content.js?v=20260721-3"></script>
-  <script src="assets/js/site.js?v=20260721-3"></script>
+  <script src="assets/js/content.js?v=20260721-4"></script>
+  <script src="assets/js/site.js?v=20260721-4"></script>
+  <script src="assets/js/motion.js?v=20260721-4"></script>
 </body>
 </html>
