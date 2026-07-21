@@ -131,9 +131,9 @@ Không công bố:
 
 ### 7. Giá và quy cách dự kiến
 
-- Cuộn 200g: 39.000đ — 30cm × 30m
-- Cuộn 500g: 79.000đ — 30cm × 80m
-- Cuộn 1kg: 129.000đ — 30cm × 150m
+- Cuộn 200g: 39.000đ — 30cm × 30cm
+- Cuộn 500g: 79.000đ — 30cm × 80cm
+- Cuộn 1kg: 129.000đ — 30cm × 150cm
 
 Combo:
 - 2 cuộn 200g: 70.000đ
