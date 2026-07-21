@@ -129,18 +129,18 @@ Không công bố:
 - công thức chi tiết
 - bí quyết sản xuất
 
-### 7. Giá dự kiến
+### 7. Giá và quy cách dự kiến
 
-- Cuộn 200g: 39.000đ
-- Cuộn 500g: 79.000đ — 20cm × 20m
-- Cuộn 1kg: 129.000đ
+- Cuộn 200g: 39.000đ — 30cm × 30m
+- Cuộn 500g: 79.000đ — 30cm × 80m
+- Cuộn 1kg: 129.000đ — 30cm × 150m
 
 Combo:
 - 2 cuộn 200g: 70.000đ
 - 3 cuộn 500g: 189.000đ
 - 2 cuộn 1kg: 237.000đ
 
-Chỉ phiên bản 500g đã có quy cách được chốt.
+Ba quy cách trên đã được nhóm xác nhận ngày 21/07/2026.
 Tất cả phải ghi là **giá bán dự kiến**.
 
 ### 8. Hình ảnh
@@ -157,7 +157,7 @@ Yêu cầu:
 
 ### 9. Logo
 
-Logo hiện tại chỉ là bản tạm.
+Logo hiện tại đã được nhóm xác nhận là logo chính thức.
 
 Sau này designer sẽ cung cấp:
 - logo ngang
@@ -181,11 +181,9 @@ Form cần:
 - Quan tâm / Dùng thử / Liên hệ tư vấn / Hợp tác
 - Nội dung thêm
 
-Dữ liệu sẽ gửi về Google Sheet qua Google Apps Script.
-Hiện chưa có URL Apps Script.
+Dữ liệu gửi về Google Sheet qua Google Apps Script. URL Apps Script đã được cấu hình trong `assets/js/content.js`.
 
-Không được giả vờ đã lưu dữ liệu khi chưa kết nối endpoint.
-Hiển thị trạng thái demo rõ ràng.
+Chỉ hiển thị thành công sau khi mã gửi được endpoint xác nhận. Nếu deployment Apps Script chưa được cập nhật hoặc không xác minh được, phải giữ dữ liệu trên form và hiển thị trạng thái chưa xác nhận.
 
 ### 11. Riêng tư
 

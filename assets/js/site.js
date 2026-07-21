@@ -18,6 +18,7 @@
   function renderHeader() {
     const host = document.querySelector("[data-site-header]");
     if (!host) return;
+    const b = cfg.brand || {};
     const links = (cfg.nav || []).map(item => {
       const active = current === item.href.toLowerCase();
       return `<a class="nav-link${active ? " is-active" : ""}" href="${item.href}"${active ? ' aria-current="page"' : ""}>${item.label}</a>`;
@@ -26,15 +27,15 @@
     host.innerHTML = `
       <div class="announcement">
         <div class="container announcement-inner">
-          <span>Mẫu thử đang được hoàn thiện</span>
-          <a href="lien-he.html#form">Đăng ký quan tâm sớm ${icon("arrow")}</a>
+          <span>Mẫu thử đang được hoàn thiện và kiểm nghiệm</span>
+          <a href="lien-he.html?interest=trial&source=announcement#form">Đăng ký trải nghiệm sớm ${icon("arrow")}</a>
         </div>
       </div>
       <header class="site-header">
         <div class="container header-inner">
           <a class="brand" href="index.html" aria-label="The Green Seed - Trang chủ">
             <img src="assets/images/logo-mark.png" width="128" height="126" alt="">
-            <span class="brand-copy"><strong>THE GREEN SEED</strong><small>Từ hạt nhãn – Vì tương lai xanh</small></span>
+            <span class="brand-copy"><strong>${b.name || "THE GREEN SEED"}</strong><small>${b.slogan || "Từ hạt nhãn – Vì tương lai xanh"}</small></span>
           </a>
           <button class="nav-toggle" type="button" aria-label="Mở menu" aria-controls="site-navigation" aria-expanded="false">
             <span class="toggle-open">${icon("menu")}</span>
@@ -42,7 +43,7 @@
           </button>
           <nav class="site-nav" id="site-navigation" aria-label="Điều hướng chính">
             <div class="nav-list">${links}</div>
-            <a class="button button-small button-primary nav-cta" href="lien-he.html#form">Đăng ký dùng thử</a>
+            <a class="button button-small button-primary nav-cta" href="lien-he.html?interest=trial&source=header#form">Đăng ký trải nghiệm sớm</a>
           </nav>
         </div>
       </header>
@@ -128,7 +129,9 @@
     const contactItems = [
       b.email ? `<a href="mailto:${b.email}">${b.email}</a>` : "",
       b.phone ? `<a href="tel:${String(b.phone).replace(/\s/g,"")}">${b.phone}</a>` : "",
-      b.address ? `<span>${b.address}</span>` : ""
+      b.tiktok ? `<a href="${b.tiktok}" target="_blank" rel="noopener noreferrer">TikTok @thegreenseedvn</a>` : "",
+      b.address ? `<span>${b.address}</span>` : "",
+      b.organization ? `<span>${b.organization}</span>` : ""
     ].filter(Boolean).join("");
     host.innerHTML = `
       <footer class="footer">
@@ -136,7 +139,7 @@
           <div class="footer-brand">
             <a class="footer-logo" href="index.html">
               <span class="footer-mark"><img src="assets/images/logo-mark.png" width="128" height="126" alt="" loading="lazy" decoding="async"></span>
-              <span><strong>THE GREEN SEED</strong><small>Từ hạt nhãn – Vì tương lai xanh</small></span>
+              <span><strong>${b.name || "THE GREEN SEED"}</strong><small>${b.slogan || "Từ hạt nhãn – Vì tương lai xanh"}</small></span>
             </a>
             <p>Biến phụ phẩm nông nghiệp thành giải pháp vật liệu sinh học có giá trị.</p>
           </div>
@@ -150,16 +153,17 @@
           <div>
             <h2 class="footer-title">Hỗ trợ</h2>
             <a href="faq.html">Câu hỏi thường gặp</a>
-            <a href="lien-he.html#form">Đăng ký dùng thử</a>
+            <a href="lien-he.html?interest=trial&source=footer#form">Đăng ký trải nghiệm sớm</a>
             <a href="lien-he.html">Liên hệ tư vấn</a>
+            <a href="quyen-rieng-tu.html">Quyền riêng tư</a>
           </div>
           <div>
             <h2 class="footer-title">Liên hệ</h2>
-            ${contactItems || '<p class="muted">Thông tin sẽ được cập nhật.</p>'}
+            ${contactItems || '<p class="muted">Kênh liên hệ đang được cập nhật.</p>'}
           </div>
         </div>
         <div class="container footer-bottom">
-          <span>© ${new Date().getFullYear()} The Green Seed.</span>
+          <span>© ${new Date().getFullYear()} ${b.name || "The Green Seed"}.</span>
           <span>Các đặc tính sản phẩm đang trong quá trình hoàn thiện và kiểm nghiệm.</span>
         </div>
       </footer>
@@ -281,30 +285,202 @@
     });
   }
 
+  function renderConfiguredContent() {
+    document.querySelectorAll("[data-product-index]").forEach(card => {
+      const product = (cfg.products || [])[Number(card.dataset.productIndex)];
+      if (!product) return;
+      const values = {
+        "[data-product-name]": product.name,
+        "[data-product-price]": product.price,
+        "[data-product-size]": product.size,
+        "[data-product-note]": product.note
+      };
+      Object.entries(values).forEach(([selector, value]) => {
+        const target = card.querySelector(selector);
+        if (target) target.textContent = value || "Đang cập nhật";
+      });
+      const cta = card.querySelector("[data-product-cta]");
+      if (cta) {
+        cta.href = `lien-he.html?interest=trial&product=${encodeURIComponent(product.id)}&source=product-card#form`;
+      }
+    });
+
+    document.querySelectorAll("[data-combo-index]").forEach(card => {
+      const combo = (cfg.combos || [])[Number(card.dataset.comboIndex)];
+      if (!combo) return;
+      card.querySelector("[data-combo-name]")?.replaceChildren(combo.name);
+      card.querySelector("[data-combo-price]")?.replaceChildren(combo.price);
+      card.querySelector("[data-combo-discount]")?.replaceChildren(combo.discount);
+    });
+  }
+
+  function getAttribution() {
+    const params = new URLSearchParams(location.search);
+    let stored = {};
+    try {
+      stored = JSON.parse(sessionStorage.getItem("tgs_attribution") || "{}");
+    } catch (err) {
+      stored = {};
+    }
+    const attribution = {
+      utmSource: params.get("utm_source") || stored.utmSource || "",
+      utmMedium: params.get("utm_medium") || stored.utmMedium || "",
+      utmCampaign: params.get("utm_campaign") || stored.utmCampaign || "",
+      utmContent: params.get("utm_content") || stored.utmContent || "",
+      utmTerm: params.get("utm_term") || stored.utmTerm || ""
+    };
+    if (Object.values(attribution).some(Boolean)) {
+      try {
+        sessionStorage.setItem("tgs_attribution", JSON.stringify(attribution));
+      } catch (err) {
+        // Tracking vẫn hoạt động trong phiên hiện tại nếu storage bị chặn.
+      }
+    }
+    return attribution;
+  }
+
+  function trackEvent(name, details = {}) {
+    const eventData = {
+      event: `tgs_${name}`,
+      page_path: location.pathname,
+      ...details
+    };
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(eventData);
+    dispatchEvent(new CustomEvent("tgs:analytics", { detail: eventData }));
+  }
+
+  function initTracking() {
+    const attribution = getAttribution();
+    trackEvent("page_view", attribution);
+    document.addEventListener("click", event => {
+      const link = event.target.closest("a[href]");
+      if (!link) return;
+      const href = link.getAttribute("href") || "";
+      if (href.includes("lien-he.html")) {
+        trackEvent("cta_click", {
+          cta_text: link.textContent.trim().replace(/\s+/g, " ").slice(0, 80),
+          cta_href: href,
+          cta_location: link.dataset.trackLocation || link.closest("section")?.className || "shared"
+        });
+      } else if (href.startsWith("tel:") || href.startsWith("mailto:") || link.hostname.includes("tiktok.com")) {
+        const contactType = link.hostname.includes("tiktok.com") ? "tiktok" : href.split(":")[0];
+        trackEvent("contact_click", { contact_type: contactType || "social" });
+      }
+    });
+  }
+
+  function verifySubmission(submissionId, timeout = 6500) {
+    return new Promise((resolve, reject) => {
+      const callback = `__tgsVerify_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+      const script = document.createElement("script");
+      const timer = setTimeout(() => cleanup(() => reject(new Error("verification-timeout"))), timeout);
+      const cleanup = done => {
+        clearTimeout(timer);
+        script.remove();
+        try {
+          delete window[callback];
+        } catch (err) {
+          window[callback] = undefined;
+        }
+        done();
+      };
+      window[callback] = payload => cleanup(() => resolve(Boolean(payload?.ok && payload?.found)));
+      script.onerror = () => cleanup(() => reject(new Error("verification-unavailable")));
+      const query = new URLSearchParams({
+        action: "verify",
+        submissionId,
+        callback,
+        _: String(Date.now())
+      });
+      script.src = `${cfg.googleAppsScriptUrl}?${query}`;
+      document.head.append(script);
+    });
+  }
+
   function initForm() {
     const form = document.querySelector("[data-interest-form]");
     if (!form) return;
     const status = form.querySelector("[data-form-status]");
+    const submit = form.querySelector('button[type="submit"]');
+    const phone = form.elements.phone;
+    const params = new URLSearchParams(location.search);
+    const attribution = getAttribution();
+    const interestMap = {
+      info: "Quan tâm sản phẩm",
+      trial: "Đăng ký trải nghiệm sớm",
+      consult: "Liên hệ tư vấn",
+      partner: "Hợp tác / phân phối",
+      privacy: "Yêu cầu về dữ liệu cá nhân"
+    };
+    const setField = (name, value) => {
+      if (form.elements[name]) form.elements[name].value = value || "";
+    };
+    const applyContext = () => {
+      const requestedInterest = interestMap[params.get("interest")];
+      if (requestedInterest && form.elements.interest) form.elements.interest.value = requestedInterest;
+      setField("product", params.get("product"));
+      setField("source", params.get("source") || "direct");
+      setField("pageUrl", location.href);
+      setField("referrer", document.referrer);
+      Object.entries(attribution).forEach(([name, value]) => setField(name, value));
+    };
+    applyContext();
+
     if (status) {
       status.setAttribute("role", "status");
       status.setAttribute("aria-live", "polite");
       status.setAttribute("aria-atomic", "true");
     }
+
+    const setStatus = (type, message) => {
+      if (!status) return;
+      status.className = "form-status";
+      if (type) status.classList.add(`is-${type}`);
+      status.textContent = message;
+    };
+
+    const validatePhone = () => {
+      if (!phone) return true;
+      const digits = phone.value.replace(/\D/g, "");
+      const valid = digits.length >= 9 && digits.length <= 12;
+      phone.setCustomValidity(valid || !phone.value ? "" : "Vui lòng nhập số điện thoại từ 9 đến 12 chữ số.");
+      return valid;
+    };
+    phone?.addEventListener("input", validatePhone);
+
+    let formStarted = false;
+    form.addEventListener("input", () => {
+      if (formStarted) return;
+      formStarted = true;
+      trackEvent("form_start", { form_name: "interest" });
+    }, { once: true });
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      const submit = form.querySelector('button[type="submit"]');
-      if (status) {
-        status.className = "form-status";
-        status.textContent = "";
+      setStatus("", "");
+      validatePhone();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        trackEvent("form_submit_error", { form_name: "interest", error_type: "validation" });
+        return;
       }
+
       const data = Object.fromEntries(new FormData(form).entries());
       data.submittedAt = new Date().toISOString();
+      data.consent = form.elements.consent?.checked ? "yes" : "no";
+      const submissionField = form.elements.submissionId;
+      const submissionId = submissionField?.value || (crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`);
+      data.submissionId = submissionId;
+      if (submissionField) submissionField.value = submissionId;
+
+      if (data.website) {
+        setStatus("success", "Cảm ơn bạn. Yêu cầu đã được ghi nhận.");
+        return;
+      }
 
       if (!cfg.googleAppsScriptUrl) {
-        if (status) {
-          status.classList.add("is-demo");
-          status.textContent = "Đây là bản demo: thông tin chưa được gửi hoặc lưu. Bạn có thể tiếp tục chỉnh sửa nội dung trong form.";
-        }
+        setStatus("demo", "Đây là bản demo: thông tin chưa được gửi hoặc lưu. Dữ liệu trên form vẫn được giữ lại.");
         return;
       }
 
@@ -312,23 +488,36 @@
       submit.classList.add("is-loading");
       submit.setAttribute("aria-busy", "true");
       submit.textContent = "Đang gửi...";
+      trackEvent("form_submit", { form_name: "interest", interest: data.interest, product: data.product || "" });
 
       try {
         await fetch(cfg.googleAppsScriptUrl, {
           method: "POST",
           mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify(data)
         });
-        form.reset();
-        if (status) {
-          status.classList.add("is-success");
-          status.textContent = "Yêu cầu đã được gửi đi. The Green Seed sẽ liên hệ sau khi hệ thống xác nhận tiếp nhận thành công.";
+        submit.textContent = "Đang xác nhận...";
+        let verified = false;
+        try {
+          verified = await verifySubmission(submissionId);
+        } catch (verifyError) {
+          verified = false;
+        }
+
+        if (verified) {
+          form.reset();
+          applyContext();
+          formStarted = false;
+          setStatus("success", "Đã ghi nhận đăng ký. Nhóm sẽ phản hồi qua email hoặc số điện thoại trong 1–3 ngày làm việc. Đăng ký không bắt buộc mua.");
+          trackEvent("form_submit_success", { form_name: "interest", interest: data.interest, product: data.product || "" });
+        } else {
+          setStatus("warning", "Yêu cầu đã được chuyển nhưng website chưa nhận được xác nhận lưu từ hệ thống. Dữ liệu trên form vẫn được giữ lại; vui lòng thử lại sau hoặc chờ nhóm phản hồi trong 1–3 ngày làm việc.");
+          trackEvent("form_submit_error", { form_name: "interest", error_type: "unverified" });
         }
       } catch (err) {
-        if (status) {
-          status.classList.add("is-error");
-          status.textContent = "Chưa gửi được. Vui lòng thử lại hoặc liên hệ trực tiếp.";
-        }
+        setStatus("error", "Chưa gửi được. Dữ liệu trên form vẫn được giữ lại để bạn thử lại.");
+        trackEvent("form_submit_error", { form_name: "interest", error_type: "network" });
       } finally {
         submit.disabled = false;
         submit.classList.remove("is-loading");
@@ -340,6 +529,8 @@
 
   renderHeader();
   renderFooter();
+  renderConfiguredContent();
+  initTracking();
   initFaq();
   initReveal();
   initForm();
