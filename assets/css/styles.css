@@ -506,3 +506,253 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   *,*::before,*::after{animation:none!important;transition:none!important}
   [data-reveal],.motion-ready [data-reveal]{opacity:1;transform:none;will-change:auto}
 }
+
+/* ═══════════════════════════════════════════════════════
+   MOTION SYSTEM — The Green Seed
+   "Hạt nhãn → Xử lý → Màng sinh học → Tuần hoàn"
+   Only animate: transform, opacity, stroke-dashoffset
+   All blocks respect prefers-reduced-motion
+═══════════════════════════════════════════════════════ */
+
+/* ── Motion keyframes ── */
+@keyframes seedFadeIn {
+  from { opacity:0; transform:scale(.55) rotate(-12deg); }
+  to   { opacity:1; transform:scale(1) rotate(0deg); }
+}
+@keyframes filmSweep {
+  from { clip-path:inset(0 100% 0 0 round 4px); opacity:.6; }
+  to   { clip-path:inset(0 0% 0 0 round 4px);   opacity:1; }
+}
+@keyframes shimmerRun {
+  0%   { transform:translateX(-110%); }
+  100% { transform:translateX(220%); }
+}
+@keyframes heroTextReveal {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes nodePop {
+  0%   { opacity:0; transform:scale(.5); }
+  70%  { transform:scale(1.08); }
+  100% { opacity:1; transform:scale(1); }
+}
+@keyframes pulseBorder {
+  0%,100% { box-shadow:0 0 0 0 rgba(111,158,49,0); }
+  50%     { box-shadow:0 0 0 6px rgba(111,158,49,.22); }
+}
+
+/* ── Hero seed SVG ── */
+.hero-seed {
+  position:absolute;
+  width:72px; height:90px;
+  right:calc(50% - 200px); top:-18px;
+  z-index:0; pointer-events:none;
+  opacity:0; /* JS animates to 1 */
+  filter:drop-shadow(0 6px 18px rgba(23,63,42,.22));
+  transform-origin:center bottom;
+  will-change:transform,opacity;
+}
+@media (max-width:767px) {
+  .hero-seed { display:none; }
+}
+
+/* ── Hero film strip ── */
+.hero-film-strip {
+  position:absolute;
+  inset:0; z-index:1; pointer-events:none;
+  border-radius:26px; overflow:hidden;
+}
+.hero-film-strip::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0; bottom:0;
+  background:linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255,255,255,.06) 35%,
+    rgba(255,255,255,.18) 50%,
+    rgba(255,255,255,.06) 65%,
+    transparent 100%
+  );
+  transform:translateX(-110%);
+  border-radius:inherit;
+}
+.hero-film-strip.film-shimmer { clip-path:inset(0 100% 0 0 round 4px); }
+.hero-film-strip.shimmer-run  {
+  animation:filmSweep 700ms 60ms cubic-bezier(.16,1,.3,1) both;
+}
+.hero-film-strip.shimmer-run::before {
+  animation:shimmerRun 900ms 400ms ease both;
+}
+
+/* ── Film material effect — edge highlight ── */
+.hero-frame::after,
+.media-card::after {
+  border:1px solid rgba(255,255,255,.28);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+/* ── Hero text stagger ── */
+@media (prefers-reduced-motion:no-preference) {
+  .hero-text-reveal {
+    opacity:0;
+    animation:heroTextReveal 560ms var(--motion-ease-out) both;
+  }
+}
+
+/* ── Film shimmer on .media-card ── */
+.media-card {
+  position:relative; overflow:hidden;
+}
+.media-card.film-shimmer::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255,255,255,.13) 50%,
+    transparent 80%
+  );
+  transform:translateX(-110%);
+  pointer-events:none;
+  border-radius:inherit;
+}
+.media-card.shimmer-run::after {
+  animation:shimmerRun 900ms 200ms ease both;
+}
+
+/* ── Process timeline ── */
+.process-line {
+  position:relative;
+  --fill-pct: 0%;
+}
+/* Mobile: vertical progress bar */
+@media (max-width:979px) {
+  .process-line::before {
+    content:'';
+    position:absolute;
+    left:20px; top:0; width:2px;
+    height:100%; background:var(--line);
+    border-radius:1px;
+    z-index:0;
+  }
+  .process-line::after {
+    content:'';
+    position:absolute;
+    left:20px; top:0; width:2px;
+    height:var(--fill-pct,0%);
+    background:linear-gradient(to bottom, var(--leaf), var(--forest));
+    border-radius:1px; z-index:1;
+    transition:height 400ms cubic-bezier(.22,1,.36,1);
+  }
+  .process-node {
+    position:relative; padding-left:52px; z-index:2;
+    transition:border-color var(--motion-base) ease, box-shadow var(--motion-base) ease;
+  }
+  .process-node::before {
+    content:'';
+    position:absolute; left:12px; top:20px;
+    width:16px; height:16px; border-radius:50%;
+    background:var(--line); border:2px solid #fff;
+    z-index:3;
+    transition:background var(--motion-base) ease, transform var(--motion-fast) var(--motion-ease);
+  }
+  .process-node.is-active::before {
+    background:var(--leaf);
+    transform:scale(1.25);
+  }
+  .process-node.is-active {
+    border-color:rgba(111,158,49,.35);
+    box-shadow:0 0 0 3px rgba(111,158,49,.1), var(--shadow-sm);
+  }
+}
+/* Desktop: horizontal arrow indicators already exist; just highlight */
+@media (min-width:980px) {
+  .process-node {
+    transition:border-color var(--motion-base) ease,
+               box-shadow var(--motion-base) ease,
+               transform var(--motion-fast) var(--motion-ease);
+  }
+  .process-node.is-active {
+    border-color:var(--leaf);
+    box-shadow:0 0 0 3px rgba(111,158,49,.15), var(--shadow);
+    transform:translateY(-3px);
+  }
+}
+
+/* SVG timeline path (desktop, inside .cycle-visual / .process-visual) */
+.process-svg-path,
+.cycle-svg-path {
+  fill:none;
+  stroke:var(--leaf);
+  stroke-width:2;
+  stroke-linecap:round;
+  transition:stroke-dashoffset 1100ms cubic-bezier(.16,1,.3,1);
+}
+
+/* ── Product card hover (desktop) ── */
+@media (min-width:768px) {
+  .product-card {
+    transition:transform 240ms cubic-bezier(.22,1,.36,1),
+               box-shadow 240ms cubic-bezier(.22,1,.36,1),
+               border-color 240ms ease;
+  }
+  .product-card:hover {
+    transform:translateY(-3px);
+    box-shadow:0 12px 36px rgba(23,63,42,.14), 0 2px 8px rgba(23,63,42,.06);
+  }
+  .product-card:hover .product-weight-badge {
+    transform:scale(1.08);
+  }
+}
+/* Product card tap (mobile) */
+.product-card.is-pressed {
+  transform:scale(.984);
+  transition:transform 100ms ease;
+}
+
+/* Weight badge transition */
+.product-weight-badge {
+  transition:transform 200ms cubic-bezier(.22,1,.36,1);
+  transform-origin:top right;
+}
+
+/* 500g featured pulse — once on load */
+@media (prefers-reduced-motion:no-preference) {
+  .product-card--featured {
+    animation:pulseBorder 1800ms 800ms ease both;
+  }
+}
+
+/* ── Circular impact nodes ── */
+.cycle-node {
+  transition:opacity 300ms ease, transform 400ms cubic-bezier(.22,1,.36,1);
+  transform-origin:center;
+}
+
+/* ── Feature card flow reveal stagger ── */
+@media (prefers-reduced-motion:no-preference) {
+  .feature-card[data-reveal] {
+    /* --reveal-delay set by JS */
+    transition-delay:var(--reveal-delay,0ms);
+  }
+}
+
+/* ─── prefers-reduced-motion: kill all motion ─── */
+@media (prefers-reduced-motion:reduce) {
+  .hero-seed,
+  .hero-film-strip,
+  .hero-film-strip::before,
+  .media-card::after,
+  .process-node,
+  .product-card,
+  .cycle-node,
+  .feature-card {
+    animation:none !important;
+    transition:none !important;
+  }
+  .hero-seed         { opacity:1 !important; transform:none !important; }
+  .hero-film-strip   { clip-path:none !important; opacity:.35 !important; }
+  .product-card--featured { box-shadow:var(--shadow) !important; }
+}
