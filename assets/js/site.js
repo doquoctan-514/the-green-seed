@@ -230,6 +230,38 @@
     });
   }
 
+  function initCounters() {
+    const counters = [...document.querySelectorAll("[data-counter]")];
+    if (!counters.length || reducedMotion.matches || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const counter = entry.target;
+        const target = Number(counter.dataset.target || 0);
+        const decimals = Number(counter.dataset.decimals || 0);
+        const formatter = new Intl.NumberFormat("vi-VN", {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        });
+        const startedAt = performance.now();
+        const duration = 1000;
+        counter.textContent = formatter.format(0);
+        const update = now => {
+          const progress = Math.min((now - startedAt) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          counter.textContent = formatter.format(target * eased);
+          if (progress < 1) requestAnimationFrame(update);
+          else counter.textContent = formatter.format(target);
+        };
+        requestAnimationFrame(update);
+        observer.unobserve(counter);
+      });
+    }, { threshold: 0.65 });
+
+    counters.forEach(counter => observer.observe(counter));
+  }
+
   function initReveal() {
     const els = [...document.querySelectorAll("[data-reveal]")];
     if (!els.length) return;
@@ -246,7 +278,10 @@
       ".process-line",
       ".timeline",
       ".faq-list",
-      ".steps"
+      ".steps",
+      ".evidence-grid",
+      ".impact-evidence-grid",
+      ".research-grid"
     ];
     document.querySelectorAll(staggerGroups.join(",")).forEach(group => {
       [...group.children].filter(el => el.matches("[data-reveal]")).forEach((el, index) => {
@@ -536,6 +571,7 @@
   renderConfiguredContent();
   initTracking();
   initFaq();
+  initCounters();
   initReveal();
   initForm();
   restoreHashTarget();
