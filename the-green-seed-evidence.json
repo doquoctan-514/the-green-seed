@@ -1,0 +1,239 @@
+{
+  "project": {
+    "name": "THE GREEN SEED",
+    "product": "Màng bọc thực phẩm sinh học đang được phát triển từ phụ phẩm hạt nhãn",
+    "status": "Prototype; chưa có chứng nhận hoặc kết quả kiểm nghiệm công khai",
+    "language": "vi"
+  },
+  "homepage_stats": [
+    {
+      "id": "vn_plastic_waste",
+      "display_value": "3,1 triệu tấn",
+      "numeric_value": 3.1,
+      "prefix": "",
+      "suffix": " triệu tấn",
+      "label": "chất thải nhựa ước tính được thải ra trên đất liền tại Việt Nam mỗi năm",
+      "source_name": "World Bank",
+      "source_year": 2022,
+      "source_title": "Hướng tới lộ trình quốc gia về giảm thiểu nhựa dùng một lần ở Việt Nam",
+      "source_url": "https://www.worldbank.org/vi/country/vietnam/publication/towards-a-national-single-use-plastics-roadmap-in-vietnam-strategies-and-options-for-reducing-priority-single-use-plasti",
+      "caveat": "Không diễn đạt thành toàn bộ lượng này đều ra biển."
+    },
+    {
+      "id": "single_use_share",
+      "display_value": "Hơn 60%",
+      "numeric_value": 60,
+      "prefix": ">",
+      "suffix": "%",
+      "label": "số vật phẩm nhựa ghi nhận trong khảo sát là nhựa dùng một lần",
+      "source_name": "World Bank",
+      "source_year": 2022,
+      "source_title": "Hướng tới lộ trình quốc gia về giảm thiểu nhựa dùng một lần ở Việt Nam",
+      "source_url": "https://www.worldbank.org/vi/country/vietnam/publication/towards-a-national-single-use-plastics-roadmap-in-vietnam-strategies-and-options-for-reducing-priority-single-use-plasti",
+      "caveat": "Đây là tỷ lệ theo số vật phẩm trong khảo sát, không phải tỷ lệ theo khối lượng toàn bộ rác nhựa Việt Nam."
+    },
+    {
+      "id": "water_leakage",
+      "display_value": "Ít nhất 10%",
+      "numeric_value": 10,
+      "prefix": "≥",
+      "suffix": "%",
+      "label": "lượng chất thải nhựa quản lý chưa tốt được ước tính rò rỉ vào đường thủy hoặc đại dương",
+      "source_name": "World Bank",
+      "source_year": 2022,
+      "source_title": "Lộ trình giảm thiểu ô nhiễm nhựa dùng một lần ở Việt Nam",
+      "source_url": "https://www.worldbank.org/vi/news/press-release/2022/07/25/a-roadmap-to-stop-single-use-plastic-pollution-in-vietnam",
+      "caveat": "Giữ từ 'ước tính' và 'ít nhất'."
+    }
+  ],
+  "opportunity_stats": [
+    {
+      "id": "consumer_willingness",
+      "display_value": "54%",
+      "numeric_value": 54,
+      "prefix": "",
+      "suffix": "%",
+      "label": "người tham gia khảo sát tại Việt Nam sẵn sàng trả cao hơn tối đa 10% cho sản phẩm làm từ vật liệu tái chế hoặc bền vững",
+      "source_name": "PwC Việt Nam",
+      "source_year": 2024,
+      "source_title": "Asia Pacific Voice of the Consumer Survey 2024 – Vietnam highlights",
+      "source_url": "https://www.pwc.com/vn/en/publications/vietnam-publications/voice-of-consumer-2024.html",
+      "caveat": "Ghi rõ đây là người tham gia khảo sát, không khái quát thành toàn bộ người Việt."
+    },
+    {
+      "id": "recycling_rate",
+      "display_value": "Khoảng 33%",
+      "numeric_value": 33,
+      "prefix": "≈",
+      "suffix": "%",
+      "label": "tỷ lệ tái chế của bốn loại nhựa chủ chốt được World Bank nghiên cứu tại Việt Nam năm 2019",
+      "source_name": "World Bank",
+      "source_year": 2021,
+      "source_title": "Market Study for Vietnam: Plastics Circularity Opportunities and Barriers",
+      "source_url": "https://www.worldbank.org/en/country/vietnam/publication/market-study-for-vietnam-plastics-circularity-opportunities-and-barriers",
+      "caveat": "Không gọi đây là tỷ lệ tái chế của toàn bộ nhựa tại Việt Nam."
+    },
+    {
+      "id": "material_value_lost",
+      "display_value": "2,2–2,9 tỷ USD/năm",
+      "label": "giá trị vật liệu ước tính bị mất khi các loại nhựa chủ chốt bị thải bỏ thay vì được tái chế",
+      "source_name": "World Bank",
+      "source_year": 2021,
+      "source_title": "Market Study for Vietnam: Plastics Circularity Opportunities and Barriers",
+      "source_url": "https://www.worldbank.org/en/country/vietnam/publication/market-study-for-vietnam-plastics-circularity-opportunities-and-barriers",
+      "caveat": "Dùng ở trang Tác động, không cần đặt trên hero."
+    }
+  ],
+  "longan_feedstock": [
+    {
+      "id": "longan_output_q2_2023",
+      "display_value": "110.000 tấn",
+      "label": "sản lượng nhãn Việt Nam ước đạt trong quý II/2023 theo Cục Trồng trọt được báo chí ngành dẫn lại",
+      "source_name": "Vietnam Agriculture / Department of Crop Production",
+      "source_year": 2023,
+      "source_title": "Diversifying export markets for Vietnamese lychee and longan",
+      "source_url": "https://vietnamagriculture.nongnghiep.vn/diversifying-export-markets-for-vietnamese-lychee-and-longan-d352852.html",
+      "caveat": "Đây là số liệu quý II/2023, không phải sản lượng cả năm hiện tại."
+    },
+    {
+      "id": "seed_share_range",
+      "display_value": "11,8–17%",
+      "label": "tỷ lệ khối lượng hạt trong quả nhãn được báo cáo ở các nghiên cứu khác nhau",
+      "sources": [
+        {
+          "source_name": "Thai Agricultural Research Journal",
+          "source_year": 2009,
+          "source_title": "Growth and Development of Longan fruit cv. Daw",
+          "source_url": "https://li01.tci-thaijo.org/index.php/thaiagriculturalresearch/article/view/91815",
+          "reported_value": "11,80%"
+        },
+        {
+          "source_name": "Food Chemistry",
+          "source_year": 2009,
+          "source_title": "Polyphenols from longan seeds and their radical-scavenging activity",
+          "source_url": "https://doi.org/10.1016/j.foodchem.2009.02.059",
+          "reported_value": "khoảng 17%"
+        }
+      ],
+      "caveat": "Tỷ lệ thay đổi theo giống, vùng trồng và độ trưởng thành; không dùng như hằng số tuyệt đối."
+    },
+    {
+      "id": "illustrative_seed_mass",
+      "display_value": "Khoảng 13.000–18.700 tấn",
+      "label": "phép tính minh họa khối lượng hạt tương ứng với 110.000 tấn quả, nếu áp dụng dải 11,8–17%",
+      "formula": "110000 × 11.8% đến 110000 × 17%",
+      "caveat": "Đây không phải lượng hạt đã được thu gom hoặc sẵn sàng làm nguyên liệu. Chỉ dùng ở trang Tác động/Công nghệ và phải ghi rõ ước tính minh họa."
+    }
+  ],
+  "research_basis": [
+    {
+      "id": "longan_seed_starch_film_2023",
+      "summary": "Một nghiên cứu năm 2023 đã phát triển màng từ tinh bột hạt nhãn kết hợp anthocyanin; màng trong nghiên cứu gần như phân hủy hoàn toàn sau 30 ngày trong điều kiện thí nghiệm được công bố.",
+      "source_name": "International Journal of Biological Macromolecules / PubMed",
+      "source_year": 2023,
+      "source_title": "Development of biodegradable active films based on longan seed starch...",
+      "source_url": "https://pubmed.ncbi.nlm.nih.gov/37595722/",
+      "doi": "10.1016/j.ijbiomac.2023.126372",
+      "caveat": "Không được biến thành tuyên bố rằng sản phẩm The Green Seed phân hủy trong 30 ngày."
+    },
+    {
+      "id": "longan_seed_film_2024",
+      "summary": "Một nghiên cứu năm 2024 sử dụng hạt nhãn làm nền cho màng bao gói kết hợp polyphenol trà và ghi nhận cải thiện một số tính chất hàng rào, đồng thời giảm hóa nâu trên táo cắt tươi trong mô hình thử nghiệm.",
+      "source_name": "ACS Food Science & Technology",
+      "source_year": 2024,
+      "source_title": "Establishing a Novel Packaging Film by Longan Seed and Tea Polyphenols",
+      "source_url": "https://doi.org/10.1021/acsfoodscitech.4c00207",
+      "doi": "10.1021/acsfoodscitech.4c00207",
+      "caveat": "Đây là nghiên cứu khác công thức; không phải kết quả thử nghiệm của The Green Seed."
+    },
+    {
+      "id": "longan_seed_polyphenols",
+      "summary": "Các nghiên cứu đã phân lập nhiều polyphenol trong hạt nhãn và ghi nhận hoạt tính bắt gốc tự do trong thử nghiệm phòng thí nghiệm.",
+      "source_name": "Food Chemistry",
+      "source_year": 2009,
+      "source_title": "Polyphenols from longan seeds and their radical-scavenging activity",
+      "source_url": "https://doi.org/10.1016/j.foodchem.2009.02.059",
+      "doi": "10.1016/j.foodchem.2009.02.059",
+      "caveat": "Chỉ hỗ trợ cách viết tiềm năng chống oxy hóa của nguyên liệu; không chứng minh màng thành phẩm có hiệu quả tương tự."
+    }
+  ],
+  "policy_context": [
+    {
+      "id": "vn_plastic_policy",
+      "summary": "Bộ Công Thương dẫn Nghị định 08/2022/NĐ-CP: từ 01/01/2026 hạn chế sản xuất, nhập khẩu một số túi ni lông khó phân hủy dưới kích thước quy định; sau 31/12/2030 hướng tới dừng sản xuất, nhập khẩu phần lớn sản phẩm nhựa dùng một lần và bao bì khó phân hủy, có các ngoại lệ theo quy định.",
+      "source_name": "Bộ Công Thương",
+      "source_year": 2024,
+      "source_title": "Người tiêu dùng quan tâm hơn vật liệu thân thiện môi trường, ngành bao bì hướng đến phát triển xanh",
+      "source_url": "https://moit.gov.vn/phat-trien-ben-vung/nganh-bao-bi-huong-den-phat-trien-xanh.html",
+      "caveat": "Không viết giản lược thành Việt Nam đã cấm toàn bộ nhựa dùng một lần."
+    }
+  ],
+  "copy": {
+    "problem_section": {
+      "eyebrow": "BÀI TOÁN CẦN THAY ĐỔI",
+      "heading": "Một lớp màng dùng trong vài phút có thể để lại bài toán dài hơn rất nhiều.",
+      "body": "Rác thải nhựa dùng một lần đang gây áp lực lớn lên hệ thống thu gom, tái chế và môi trường nước. The Green Seed bắt đầu từ một câu hỏi: liệu một phụ phẩm nông nghiệp quen thuộc có thể trở thành một phần của giải pháp vật liệu mới?"
+    },
+    "feedstock_section": {
+      "eyebrow": "NGUỒN NGUYÊN LIỆU BỊ BỎ QUÊN",
+      "heading": "Từ hạt nhãn sau tiêu dùng đến một hướng đi vật liệu mới.",
+      "body": "Hạt nhãn chiếm một phần đáng kể khối lượng quả trong các nghiên cứu đã công bố, nhưng thường không phải phần được sử dụng làm thực phẩm. Nhóm đang nghiên cứu cách khai thác nguồn nguyên liệu này để phát triển màng bọc sinh học."
+    },
+    "solution_section": {
+      "eyebrow": "GIẢI PHÁP ĐANG ĐƯỢC PHÁT TRIỂN",
+      "heading": "Biến phụ phẩm thành màng bọc — theo một quy trình đang tiếp tục được tối ưu và kiểm nghiệm.",
+      "cards": [
+        {
+          "title": "Tận dụng phụ phẩm",
+          "body": "Nghiên cứu sử dụng hạt nhãn như một nguồn nguyên liệu có giá trị thay vì xem đó chỉ là phần bỏ đi."
+        },
+        {
+          "title": "Phát triển hệ vật liệu",
+          "body": "Kết hợp nguyên liệu từ hạt nhãn với hệ vật liệu sinh học để tạo mẫu màng có khả năng ứng dụng trong bảo quản thực phẩm."
+        },
+        {
+          "title": "Kiểm nghiệm trước thương mại hóa",
+          "body": "Tiếp tục đánh giá độ bền, khả năng cản ẩm, an toàn tiếp xúc thực phẩm và điều kiện phân hủy trước khi đưa ra thị trường."
+        }
+      ]
+    },
+    "market_section": {
+      "eyebrow": "TÍN HIỆU TỪ THỊ TRƯỜNG",
+      "heading": "Người tiêu dùng quan tâm hơn đến vật liệu bền vững — nhưng niềm tin phải đến từ sự minh bạch.",
+      "body": "The Green Seed lựa chọn công khai trạng thái mẫu thử, nguồn dữ liệu và phạm vi của từng tuyên bố, thay vì biến định hướng nghiên cứu thành lời hứa đã được chứng minh."
+    },
+    "research_disclaimer": "Các nghiên cứu được trích dẫn là bằng chứng nền tảng về tiềm năng của nguyên liệu hạt nhãn. Chúng không phải kết quả kiểm nghiệm của sản phẩm The Green Seed."
+  },
+  "motion": {
+    "counter_rules": [
+      "Chỉ chạy một lần khi phần tử vào viewport.",
+      "Thời lượng khoảng 900–1200 ms.",
+      "Dùng easing nhẹ, không bounce.",
+      "Nội dung cuối cùng phải có sẵn trong DOM cho accessibility.",
+      "Khi prefers-reduced-motion: reduce, hiển thị ngay giá trị cuối.",
+      "Không dùng số ngẫu nhiên hoặc tăng vượt quá số nguồn."
+    ],
+    "visuals": [
+      {
+        "stat": "3,1 triệu tấn",
+        "visual": "Một lưới chấm hoặc các lớp dải nhựa tích lũy; không dùng hình đại dương chung chung."
+      },
+      {
+        "stat": "Hơn 60%",
+        "visual": "Donut hoặc 100 vật phẩm, trong đó hơn 60 vật phẩm được highlight."
+      },
+      {
+        "stat": "Ít nhất 10%",
+        "visual": "Dòng chuyển động từ đất liền sang đường thủy, chạy một lần theo scroll."
+      },
+      {
+        "stat": "11,8–17%",
+        "visual": "Mặt cắt quả nhãn gồm vỏ, cùi và hạt; phần hạt được nhấn mạnh nhưng ghi rõ tỷ lệ biến thiên."
+      },
+      {
+        "stat": "54%",
+        "visual": "Gauge bán nguyệt hoặc 100 người, 54 người được highlight."
+      }
+    ]
+  }
+}
