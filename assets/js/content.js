@@ -12,9 +12,9 @@ window.TGS_CONFIG = {
   },
   googleAppsScriptUrl: "https://script.google.com/macros/s/AKfycbwwb3k3e_tBqlr_sByDGifW-YVlRyWfg0jiywyt0ABrmnvI1GOQGB-RGbsXh7Xz1tn8IA/exec",
   products: [
-    { id: "200g", name: "Cuộn 200g", price: "39.000đ", size: "30cm × 30cm" },
-    { id: "500g", name: "Cuộn 500g", price: "79.000đ", size: "30cm × 80cm" },
-    { id: "1kg", name: "Cuộn 1kg", price: "129.000đ", size: "30cm × 150cm" }
+    { id: "200g", name: "Cuộn 200g", price: "39.000đ", size: "30cm × 30m" },
+    { id: "500g", name: "Cuộn 500g", price: "79.000đ", size: "30cm × 80m" },
+    { id: "1kg", name: "Cuộn 1kg", price: "129.000đ", size: "30cm × 150m" }
   ],
   combos: [
     { id: "combo-2x200g", name: "Combo 2 cuộn 200g", price: "70.000đ", discount: "-10%" },
