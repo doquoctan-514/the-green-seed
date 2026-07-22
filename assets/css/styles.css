@@ -289,10 +289,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .internal-evidence strong{font-size:clamp(2rem,9vw,3.4rem);line-height:1;color:var(--forest);letter-spacing:-.04em}
 .internal-evidence span{font-weight:800}.internal-evidence small{margin-top:8px;color:var(--muted)}
 .feedstock-visual{min-width:0;padding:22px;border:1px solid var(--line);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow)}
-.longan-cutaway{position:relative;display:grid;place-items:center;width:min(210px,70%);aspect-ratio:1;margin:0 auto 24px;border-radius:50%;background:#a97035;box-shadow:inset -12px -8px 24px rgba(74,40,18,.22),0 20px 45px rgba(62,42,19,.14)}
-.longan-shell,.longan-aril,.longan-seed{position:absolute;border-radius:50%}
-.longan-shell{inset:13%;background:#f0e0ba}.longan-aril{inset:23%;background:radial-gradient(circle at 38% 30%,#fffdf2,#d9cfb4);box-shadow:inset -8px -6px 14px rgba(80,57,27,.12)}
-.longan-seed{inset:36%;background:radial-gradient(circle at 34% 26%,#7b5638 0 8%,#23170f 42%,#0e0906);box-shadow:inset -8px -8px 13px #000,0 4px 10px rgba(0,0,0,.25)}
+.longan-photo{display:block;width:100%;aspect-ratio:4/3;margin:0 auto 24px;border-radius:20px;object-fit:cover;object-position:center;background:#eef4f7;box-shadow:0 16px 36px rgba(28,55,42,.13)}
 .feedstock-stats{display:grid;gap:10px}
 .feedstock-stats article{display:grid;gap:3px;padding:15px;border-radius:16px;background:#f4f5ec}
 .feedstock-stats strong{font-size:1.25rem;color:var(--forest)}.feedstock-stats span{font-size:.85rem;color:var(--muted)}
